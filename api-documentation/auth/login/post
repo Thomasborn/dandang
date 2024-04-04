@@ -1,0 +1,86 @@
+# API Documentation
+
+## Login Endpoint
+
+### POST /api/login
+
+This endpoint allows users to authenticate and obtain an API token for subsequent API requests.
+
+### Request
+
+- **Method**: `POST`
+- **URL**: `{{url}}/api/login`
+- **Content-Type**: `application/json`
+
+#### Request Body
+
+```json
+{
+    "username": "your_username",
+    "password": "your_password"
+}
+```
+
+### Response
+
+- **Success Response:**
+  - **Status Code**: `200 OK`
+  - **Body:**
+
+    ```json
+    {
+        "success": true,
+        "message": "Success",
+        "data": {
+            "login_time": 1705685759155,
+            "exp": 1705692959155,
+            "api_token": "659|GxZWUG03ad5ZYuH8l4a0i6uqlFjFy0HNqoq3H3GSd5903173",
+            "refresh_token": "658|7AfGpffpKiBubw8ei5KuHmXquoC6cNJRjRaxOsoTa06bdb68",
+            "user": {
+                "id": 12,
+                "name": "sales motoris 1",
+                "email": "salesmotoris1@example.com",
+                "address": "new-address",
+                "contact": 1234
+            },
+            "role": {
+                "role_id": 6,
+                "role": "sales motoris",
+                "permission": []
+            }
+        },
+        "pagination": null
+    }
+    ```
+
+- **Error Responses:**
+  - **Status Code**: `401 Unauthorized`
+    - **Body:**
+
+      ```json
+      {
+          "success": false,
+          "message": "Authentication failed. Invalid username or password."
+      }
+      ```
+
+### Response Description
+
+- `success`: Indicates whether the authentication was successful.
+- `message`: Describes the result of the authentication attempt.
+- `data`: Contains information about the authenticated user.
+  - `login_time`: Timestamp of the login.
+  - `exp`: Expiration timestamp of the API token.
+  - `api_token`: Token for authenticating future requests.
+  - `refresh_token`: Token for refreshing the API token.
+  - `user`: Information about the authenticated user.
+    - `id`: User ID.
+    - `name`: User's name.
+    - `email`: User's email address.
+    - `address`: User's address.
+    - `contact`: User's contact number.
+  - `role`: Information about the user's role.
+    - `role_id`: Role ID.
+    - `role`: User's role.
+    - `permission`: Array of permissions associated with the role.
+- `pagination`: Information about pagination (not applicable for this endpoint).
